@@ -3,7 +3,7 @@
 In your project directory, use NPM to create a [SvelteKit](https://kit.svelte.dev/) app
 
 ```
-$ npm init svelte@next .
+npm init svelte@next .
 ```
 
 Install the static adapter with
