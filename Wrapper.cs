@@ -6,13 +6,13 @@ class Wrapper : System.Windows.Forms.Form
 {
     Wrapper()
     {
-        Width = 800;
-        Height = 600;
+        Width = 600;
+        Height = 800;
         StartPosition = FormStartPosition.CenterScreen;
         var blazor = new BlazorWebView()
         {
             Dock = DockStyle.Fill,
-            HostPage = @"wwwroot\index.html",
+            HostPage = Application.StartupPath + @"wwwroot\index.html",
             Services = (new ServiceCollection()).AddBlazorWebView().BuildServiceProvider()
         };
         InitializeAsync(blazor);
