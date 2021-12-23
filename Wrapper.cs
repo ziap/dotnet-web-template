@@ -6,8 +6,8 @@ class Wrapper : System.Windows.Forms.Form
 {
     Wrapper()
     {
-        Width = 600;
-        Height = 800;
+        Width = 800;
+        Height = 600;
         StartPosition = FormStartPosition.CenterScreen;
         var blazor = new BlazorWebView()
         {
