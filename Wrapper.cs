@@ -1,31 +1,27 @@
-using Microsoft.AspNetCore.Components.WebView.WindowsForms;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Web.WebView2.Core;
+using Microsoft.Web.WebView2.WinForms;
 
-class Wrapper : System.Windows.Forms.Form
+class Wraper : System.Windows.Forms.Form
 {
-    Wrapper()
+    Wraper()
     {
+        // Initial form configuration
         Width = 800;
         Height = 600;
+        Text = "Loading...";
         StartPosition = FormStartPosition.CenterScreen;
-        var blazor = new BlazorWebView()
-        {
-            Dock = DockStyle.Fill,
-            HostPage = Application.StartupPath + @"wwwroot\index.html",
-            Services = (new ServiceCollection()).AddBlazorWebView().BuildServiceProvider()
-        };
-        InitializeAsync(blazor);
-        Controls.Add(blazor);
+        InitWebView();
+    }
+    
+    async void InitWebView() {
+        var webView = new WebView2() {Dock = DockStyle.Fill};
+        await webView.EnsureCoreWebView2Async();
+        webView.CoreWebView2.SetVirtualHostNameToFolderMapping("0.0.0.0", Application.StartupPath + "wwwroot", CoreWebView2HostResourceAccessKind.Allow);
+        webView.CoreWebView2.DocumentTitleChanged += (sender, e) => Text = webView.CoreWebView2.DocumentTitle;
+        webView.Source = new Uri("https://0.0.0.0/index.html");
+        Controls.Add(webView);
     }
 
-    async void InitializeAsync(BlazorWebView blazor)
-    {
-        var op = new CoreWebView2EnvironmentOptions("--disable-web-security");
-        var env = await CoreWebView2Environment.CreateAsync(null, null, op);
-        await blazor.WebView.EnsureCoreWebView2Async(env);
-        blazor.WebView.CoreWebView2.DocumentTitleChanged += (sender, e) => Text = blazor.WebView.CoreWebView2.DocumentTitle;
-    }
 
     /// <summary>
     ///  The main entry point for the application.
@@ -34,6 +30,6 @@ class Wrapper : System.Windows.Forms.Form
     static void Main()
     {
         ApplicationConfiguration.Initialize();
-        Application.Run(new Wrapper());
+        Application.Run(new Wraper());
     }
 }

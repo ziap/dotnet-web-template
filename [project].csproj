@@ -7,17 +7,17 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <Configuration>Release</Configuration>
-    <!-- Create a single ~150MB executable
+    <!-- Create a single ~150MB executable -->
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <PublishReadyToRun>true</PublishReadyToRun>
     <PublishSingleFile>true</PublishSingleFile>
     <PublishSelfContained>true</PublishSelfContained>
-    -->
+    <!---->
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebView.WindowsForms" Version="6.0.101-preview.10.2068" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1054.31" />
   </ItemGroup>
 
   <ItemGroup>
