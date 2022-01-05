@@ -12,6 +12,9 @@ Create windows app with web technology
  - (Optional) Rename `[project].csproj` to your project name.
  - Copy your existing static web app into the `wwwroot` folder.
  - Open the .csproj file with Visual Studio or use the .NET CLI to build and run the program.
+ - **Note:**
+    + Build with the Debug profile if you want to use the dev tool.
+    + You can set up a dev server by changing the WebView source in the `#if DEBUG` block.
 
 ## Framework integration
 You can use any web framework you want as long as your website is static (i.e served with HTML files instead of a web server).
