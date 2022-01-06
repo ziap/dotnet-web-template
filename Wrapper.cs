@@ -15,9 +15,9 @@ class Wraper : System.Windows.Forms.Form
     
     async void InitWebView() {
         var webView = new WebView2() {Dock = DockStyle.Fill};
-        var env = await CoreWebView2Environment.CreateAsync(null, Path.Combine(Application.StartupPath, "userdata"), null);
+        var env = await CoreWebView2Environment.CreateAsync(null, Path.Combine(Path.GetTempPath(), Application.ProductName), null);
         await webView.EnsureCoreWebView2Async(env);
-        webView.CoreWebView2.SetVirtualHostNameToFolderMapping("0.0.0.0", Application.StartupPath + "wwwroot", CoreWebView2HostResourceAccessKind.Allow);
+        webView.CoreWebView2.SetVirtualHostNameToFolderMapping("0.0.0.0", Path.Combine(Application.StartupPath, "wwwroot"), CoreWebView2HostResourceAccessKind.Allow);
         webView.CoreWebView2.DocumentTitleChanged += (sender, e) => Text = webView.CoreWebView2.DocumentTitle;
         webView.CoreWebView2.WindowCloseRequested += (sender, e) => Application.Exit();
 #if DEBUG
